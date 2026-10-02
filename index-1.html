@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#eff4ef" />
+  <meta name="description" content="PAWEH — راهنمای مدرن پاوه و هورامان؛ طبیعت، فرهنگ، مردم، روستاها، غذا، صنایع دستی و ایده‌های سفر." />
+  <meta property="og:title" content="PAWEH — روایت یک شهر میان کوه و آسمان" />
+  <meta property="og:description" content="یک راهنمای تصویری و مینیمال برای کشف پاوه و هورامان." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <title>PAWEH — پاوه</title>
+
+  <style>
+    :root {
+      --bg: #eff4ef;
+      --paper: #f8fbf7;
+      --card: rgba(255,255,255,.74);
+      --solid: #ffffff;
+      --ink: #102018;
+      --muted: #6d7a72;
+      --line: rgba(16,32,24,.10);
+      --green: #126b4f;
+      --green-2: #1d8a67;
+      --sky: #6e99a8;
+      --sand: #e6d8bd;
+      --shadow: 0 22px 70px rgba(16,32,24,.10), 0 5px 18px rgba(16,32,24,.05);
+      --radius: 34px;
+      --ease: cubic-bezier(.25,.1,.25,1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b120e;
+        --paper: #101812;
+        --card: rgba(22,31,25,.75);
+        --solid: #151f18;
+        --ink: #eff7f1;
+        --muted: #9ca9a0;
+        --line: rgba(255,255,255,.09);
+        --green: #6fd1aa;
+        --green-2: #37ae82;
+        --sky: #90b9c5;
+        --sand: #8d795c;
+        --shadow: 0 24px 80px rgba(0,0,0,.34), 0 4px 18px rgba(0,0,0,.22);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(29,138,103,.06), transparent 28%),
+        radial-gradient(circle at 80% 30%, rgba(110,153,168,.08), transparent 26%);
+      z-index: -2;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    img { display: block; width: 100%; }
+    ::selection { background: rgba(18,107,79,.20); }
+
+    .container { width: min(92%, 1240px); margin: 0 auto; }
+    section { position: relative; padding: 120px 0; }
+
+    /* Navigation */
+    .nav-shell {
+      position: fixed;
+      z-index: 1000;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(94%, 1160px);
+    }
+    .nav {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 10px 0 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      box-shadow: var(--shadow);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      box-shadow: 0 10px 24px rgba(18,107,79,.24);
+      font-size: 15px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 3px; align-items: center; }
+    .nav-links a {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      transition: .3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--ink); background: rgba(127,127,127,.10); }
+    .nav-cta {
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .menu-btn { display: none; border: 0; background: transparent; color: var(--ink); font-size: 22px; cursor: pointer; }
+
+    /* Type */
+    .eyebrow {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .section-title {
+      max-width: 900px;
+      font-size: clamp(44px, 7vw, 88px);
+      line-height: 1.05;
+      letter-spacing: -.065em;
+      font-weight: 900;
+    }
+    .section-lead {
+      max-width: 700px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+    }
+    .gradient {
+      background: linear-gradient(115deg, var(--ink) 8%, var(--green) 45%, var(--sky) 80%, var(--ink) 96%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: hueflow 9s ease-in-out infinite;
+    }
+    @keyframes hueflow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      padding-top: 150px;
+      padding-bottom: 70px;
+      display: flex;
+      align-items: center;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero h1 {
+      font-size: clamp(68px, 10vw, 148px);
+      line-height: .92;
+      letter-spacing: -.085em;
+      font-weight: 900;
+    }
+    .hero h1 .line { display: block; }
+    .hero-kicker { margin-top: 30px; color: var(--muted); max-width: 650px; font-size: clamp(18px, 2.4vw, 24px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--ink); color: var(--bg); box-shadow: 0 14px 34px rgba(16,32,24,.14); }
+    .btn-soft { background: var(--card); color: var(--ink); backdrop-filter: blur(16px); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; }
+    .pill { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.28); font-size: 12px; }
+
+    .hero-visual { position: relative; min-height: 600px; }
+    .hero-photo {
+      position: absolute;
+      inset: 0 0 50px 40px;
+      overflow: hidden;
+      border-radius: 46px;
+      box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
+    }
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.25));
+      pointer-events: none;
+    }
+    .hero-photo img { height: 100%; object-fit: cover; transform: scale(1.06); }
+    .floating-note {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(300px, 80%);
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      backdrop-filter: blur(18px) saturate(150%);
+      box-shadow: var(--shadow);
+      z-index: 3;
+    }
+    .floating-note strong { display: block; font-size: 22px; line-height: 1.25; margin-bottom: 7px; }
+    .floating-note span { color: var(--muted); font-size: 13px; }
+
+    /* Stats */
+    .stats { padding-top: 60px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .stat {
+      padding: 28px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+    .stat-number { font-size: clamp(34px, 5vw, 62px); font-weight: 900; line-height: 1; letter-spacing: -.06em; }
+    .stat-label { margin-top: 11px; color: var(--muted); font-size: 13px; }
+
+    /* Bento */
+    .bento { margin-top: 56px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .tile {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      min-height: 280px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--solid);
+      box-shadow: var(--shadow);
+      transform-style: preserve-3d;
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    .tile:hover { box-shadow: 0 32px 90px rgba(16,32,24,.14); }
+    .tile.big { grid-column: span 7; min-height: 460px; padding: 0; }
+    .tile.medium { grid-column: span 5; }
+    .tile.small { grid-column: span 4; }
+    .tile-image { height: 100%; min-height: 460px; object-fit: cover; transition: transform 1s var(--ease); }
+    .tile.big:hover .tile-image { transform: scale(1.05); }
+    .tile-overlay {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 90px 28px 28px;
+      color: white;
+      background: linear-gradient(transparent, rgba(0,0,0,.76));
+    }
+    .tile-overlay h3 { font-size: 35px; line-height: 1.1; }
+    .tile-overlay p { margin-top: 6px; opacity: .82; }
+    .icon-bubble {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      color: var(--green);
+      background: rgba(18,107,79,.11);
+      font-size: 21px;
+      margin-bottom: 32px;
+    }
+    .tile h3 { font-size: 28px; line-height: 1.2; letter-spacing: -.035em; }
+    .tile p { color: var(--muted); margin-top: 10px; max-width: 500px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; color: var(--muted); font-size: 12px; }
+
+    /* Culture / people */
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; align-items: stretch; margin-top: 56px; }
+    .photo-card { overflow: hidden; min-height: 550px; border-radius: 40px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .photo-card img { height: 100%; object-fit: cover; }
+    .story { padding: 38px; border-radius: 40px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
+    .story h3 { font-size: 40px; line-height: 1.1; letter-spacing: -.045em; }
+    .story p { color: var(--muted); margin-top: 17px; font-size: 16px; }
+    .quote-line { margin-top: 28px; padding: 20px 22px; border-right: 3px solid var(--green); background: rgba(18,107,79,.06); border-radius: 18px; font-weight: 600; }
+
+    /* Explorer */
+    .explorer-tools { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter {
+      border: 1px solid var(--line); background: var(--card); color: var(--muted); padding: 9px 13px; border-radius: 999px; cursor: pointer;
+      transition: .3s var(--ease);
+    }
+    .filter.active, .filter:hover { color: var(--bg); background: var(--ink); }
+    .search {
+      width: min(100%, 290px); border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 11px 15px; border-radius: 999px; outline: none;
+    }
+    .place-grid { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .place-card {
+      overflow: hidden; border: 1px solid var(--line); background: var(--solid); border-radius: 30px; box-shadow: var(--shadow); transition: transform .4s var(--ease), opacity .35s var(--ease);
+    }
+    .place-card:hover { transform: translateY(-7px); }
+    .place-card.hidden { display: none; }
+    .place-photo { height: 245px; overflow: hidden; }
+    .place-photo img { height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .place-card:hover .place-photo img { transform: scale(1.06); }
+    .place-content { padding: 22px; }
+    .place-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .place-title { font-size: 24px; line-height: 1.2; font-weight: 800; }
+    .place-type { color: var(--green); font-size: 11px; font-weight: 800; }
+    .place-content p { margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .place-link { display: inline-flex; margin-top: 15px; color: var(--green); font-size: 13px; font-weight: 700; }
+
+    /* Journey */
+    .journey { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .step { padding: 27px; border-radius: 30px; background: var(--solid); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .step-num { font-size: 12px; color: var(--green); font-weight: 900; }
+    .step h3 { font-size: 25px; margin-top: 11px; }
+    .step p { color: var(--muted); margin-top: 8px; font-size: 14px; }
+
+    /* Food + crafts */
+    .feature-strip { margin-top: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature {
+      position: relative; min-height: 300px; border-radius: 34px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+    .feature img { height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+    .feature:hover img { transform: scale(1.05); }
+    .feature .feature-text { position: absolute; inset: auto 0 0; padding: 85px 25px 24px; color: white; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
+    .feature h3 { font-size: 30px; line-height: 1.1; }
+    .feature p { opacity: .85; margin-top: 5px; font-size: 13px; }
+
+    /* Gallery */
+    .gallery { margin-top: 56px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+    .gallery-item { overflow: hidden; border-radius: 24px; border: 1px solid var(--line); cursor: zoom-in; background: var(--solid); min-height: 190px; }
+    .gallery-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+    .gallery-item:nth-child(2) { grid-column: span 5; }
+    .gallery-item:nth-child(3) { grid-column: span 5; }
+    .gallery-item:nth-child(4) { grid-column: span 4; }
+    .gallery-item:nth-child(5) { grid-column: span 4; }
+    .gallery-item:nth-child(6) { grid-column: span 4; }
+    .gallery-item img { height: 100%; min-height: 190px; object-fit: cover; transition: transform .9s var(--ease); }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* Location */
+    .location-box { margin-top: 56px; min-height: 470px; border-radius: 42px; overflow: hidden; position: relative; box-shadow: var(--shadow); border: 1px solid var(--line); background: #162019; }
+    .location-art {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(111,209,170,.50), transparent 27%),
+        radial-gradient(circle at 72% 50%, rgba(144,185,197,.27), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(230,216,189,.20), transparent 25%),
+        linear-gradient(155deg, #10261c 0%, #183e2f 45%, #102218 100%);
+    }
+    .mountain {
+      position: absolute; bottom: -1px; width: 0; height: 0; border-left: 190px solid transparent; border-right: 190px solid transparent; border-bottom: 330px solid rgba(255,255,255,.07);
+    }
+    .m1 { left: 2%; }
+    .m2 { left: 22%; border-bottom-height: 260px; transform: scale(1.2); }
+    .m3 { right: 4%; transform: scale(1.4); }
+    .location-content { position: relative; z-index: 2; min-height: 470px; display: flex; align-items: flex-end; padding: 38px; color: white; background: linear-gradient(transparent 25%, rgba(0,0,0,.78)); }
+    .location-content h3 { font-size: clamp(48px, 9vw, 100px); line-height: .95; letter-spacing: -.075em; }
+    .location-content p { opacity: .78; margin-top: 12px; }
+    .location-actions { margin-top: 20px; display: flex; gap: 9px; flex-wrap: wrap; }
+
+    /* Sources */
+    .sources { margin-top: 42px; padding: 25px; border-radius: 28px; border: 1px solid var(--line); background: var(--card); color: var(--muted); font-size: 12px; }
+    .sources strong { color: var(--ink); display: block; margin-bottom: 8px; }
+    .sources a { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Footer / signature */
+    .final { padding: 150px 0 110px; text-align: center; }
+    .final h2 { font-size: clamp(54px, 10vw, 122px); line-height: .94; letter-spacing: -.075em; }
+    .signature { margin-top: 30px; font-size: 16px; color: var(--muted); }
+    .signature strong { color: var(--ink); }
+    .footer { padding: 26px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 2000; display: none; place-items: center; padding: 20px; background: rgba(0,0,0,.82); backdrop-filter: blur(12px);
+    }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 84vh; max-width: min(1100px, 94vw); object-fit: contain; border-radius: 22px; box-shadow: 0 30px 100px rgba(0,0,0,.45); }
+    .lightbox-close { position: absolute; top: 18px; left: 18px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.10); color: white; cursor: pointer; font-size: 23px; }
+    .lightbox-caption { position: absolute; right: 24px; bottom: 20px; left: 24px; text-align: center; color: rgba(255,255,255,.74); font-size: 12px; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity .85s var(--ease), transform .85s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 920px) {
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 500px; }
+      .hero-photo { inset: 0 0 40px 0; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .tile.big, .tile.medium, .tile.small { grid-column: span 12; }
+      .place-grid { grid-template-columns: 1fr 1fr; }
+      .journey { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      section { padding: 90px 0; }
+      .nav-links, .nav-cta { display: none; }
+      .menu-btn { display: block; }
+      .nav { padding-inline: 14px; }
+      .nav-links.open {
+        display: flex; position: absolute; top: 66px; left: 0; right: 0; padding: 10px; flex-direction: column; border: 1px solid var(--line); background: var(--card); border-radius: 26px; backdrop-filter: blur(22px);
+      }
+      .nav-links.open a { width: 100%; text-align: center; padding: 11px; }
+      .hero { padding-top: 120px; }
+      .hero h1 { font-size: clamp(64px, 18vw, 94px); }
+      .hero-visual { min-height: 430px; }
+      .floating-note { width: 76%; }
+      .stats-grid, .place-grid, .feature-strip { grid-template-columns: 1fr; }
+      .tile.big { min-height: 350px; }
+      .tile-image { min-height: 350px; }
+      .split .photo-card { min-height: 390px; }
+      .story { padding: 28px; }
+      .explorer-tools { align-items: stretch; }
+      .search { width: 100%; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(n) { grid-column: span 1; grid-row: span 1; min-height: 160px; }
+      .gallery-item:first-child { grid-column: span 2; }
+      .location-box, .location-content { min-height: 420px; }
+      .location-content { padding: 26px; }
+      .footer-row { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav-shell">
+    <nav class="nav" aria-label="ناوبری اصلی">
+      <a class="brand" href="#top" aria-label="PAWEH">
+        <span class="brand-mark">P</span>
+        <span>PAWEH.</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#story">داستان پاوه</a></li>
+        <li><a href="#explore">کشف کن</a></li>
+        <li><a href="#culture">مردم و فرهنگ</a></li>
+        <li><a href="#gallery">گالری</a></li>
+        <li><a href="#location">موقعیت</a></li>
+      </ul>
+
+      <a class="nav-cta" href="#explore">شروع کشف</a>
+      <button class="menu-btn" aria-label="باز کردن منو" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">KERMANSHAH · HAW̆RAMAN</div>
+          <h1>
+            <span class="line">پاوه</span>
+            <span class="line gradient">از نزدیک.</span>
+          </h1>
+          <p class="hero-kicker">
+            یک راهنمای تصویری برای شهری که کوه‌ها دورش را گرفته‌اند؛
+            برای دیدن طبیعت، شناخت فرهنگ و پیدا کردن مسیرهای تازه در پاوه و اطرافش.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#explore">جاهای دیدنی را ببین <span>↓</span></a>
+            <a class="btn btn-soft" href="#culture">مردم و فرهنگ <span>↗</span></a>
+          </div>
+          <div class="hero-meta">
+            <span class="pill">زاگرس</span>
+            <span class="pill">اورامانات</span>
+            <span class="pill">طبیعت + فرهنگ + سفر</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-photo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Hawraman_in_Iran_by_Mardetanha_%281%29_02.jpg" alt="منظر کوهستانی هورامان" loading="eager" fetchpriority="high" />
+          </div>
+          <div class="floating-note">
+            <strong>منظر فرهنگی هورامان/اورامانات</strong>
+            <span>در سال ۲۰۲۱ در فهرست میراث جهانی یونسکو ثبت شد.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats" aria-label="اطلاعات سریع">
+      <div class="container stats-grid">
+        <div class="stat reveal"><div class="stat-number" data-count="2021">۰</div><div class="stat-label">سال ثبت جهانی منظر فرهنگی هورامان/اورامانات</div></div>
+        <div class="stat reveal"><div class="stat-number">۱۵۴۰<span style="font-size:.45em">m</span></div><div class="stat-label">ارتفاع تقریبی شهر پاوه از سطح دریا</div></div>
+        <div class="stat reveal"><div class="stat-number">زاگرس</div><div class="stat-label">بستر طبیعی و کوهستانی منطقه</div></div>
+        <div class="stat reveal"><div class="stat-number">∞</div><div class="stat-label">تعداد قاب‌هایی که ارزش ثبت کردن دارند!</div></div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">THE STORY</div>
+          <h2 class="section-title">پاوه را باید <span class="gradient">راه رفت.</span></h2>
+          <p class="section-lead">
+            پاوه فقط مجموعه‌ای از «جاهای دیدنی» نیست. شهر، روستا، کوه، باغ، زبان، پوشش و زندگی روزمره در این منطقه به هم وصل‌اند؛ چیزی که هویت هورامان را شکل داده است.
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="tile big reveal">
+            <img class="tile-image" src="https://upload.wikimedia.org/wikipedia/commons/7/76/Hawraman_in_Iran_by_Mardetanha_%281%29_05.jpg" alt="نمایی گسترده از هورامان" loading="lazy" />
+            <div class="tile-overlay">
+              <h3>کوه، خانه، دره.</h3>
+              <p>چیزی که در اولین نگاه، شکل سکونت را با طبیعت گره می‌زند.</p>
+            </div>
+          </article>
+
+          <article class="tile medium reveal tilt">
+            <div class="icon-bubble">⌁</div>
+            <h3>معماری پلکانی</h3>
+            <p>در بسیاری از روستاها و سکونتگاه‌های هورامانی، سازگاری با شیب تند کوهستان به بخشی از معماری و منظر تبدیل شده است.</p>
+            <div class="tag-row"><span class="tag">خشکه‌چین</span><span class="tag">تراس</span><span class="tag">کوهستان</span></div>
+          </article>
+
+          <article class="tile small reveal tilt">
+            <div class="icon-bubble">✦</div>
+            <h3>طبیعت</h3>
+            <p>چشمه‌ها، دره‌ها، آبشارها و چشم‌اندازهای کوهستانی، بخش مهمی از تجربه سفر به شهرستان پاوه‌اند.</p>
+          </article>
+
+          <article class="tile small reveal tilt">
+            <div class="icon-bubble">◌</div>
+            <h3>زبان و روایت</h3>
+            <p>هورامی و دیگر شیوه‌های گفتار محلی، بخش مهمی از میراث ناملموس منطقه‌اند.</p>
+          </article>
+
+          <article class="tile small reveal tilt">
+            <div class="icon-bubble">⌂</div>
+            <h3>زندگی روزمره</h3>
+            <p>پاوه را فقط از پشت لنز نبین؛ بازار، مسیرها و آدم‌هایش بخش اصلی داستان‌اند.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CULTURE -->
+    <section id="culture">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">PEOPLE & CULTURE</div>
+          <h2 class="section-title">مردم، لباس، <span class="gradient">هویت.</span></h2>
+          <p class="section-lead">برای معرفی فرهنگ، بهتر است از تصویر واقعی و روایت مستند استفاده کنیم؛ بدون تبدیل کردن آدم‌ها به یک کلیشه توریستی.</p>
+        </div>
+
+        <div class="split">
+          <div class="photo-card reveal">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/A_group_of_Kurdish_men_with_traditional_clothing_at_Hawraman%2C_Kurdistan.jpg" alt="مردان کرد با پوشش سنتی در هورامان" loading="lazy" />
+          </div>
+          <div class="story reveal">
+            <h3>فرهنگ را باید از خود منطقه شنید.</h3>
+            <p>
+              هورامان در امتداد استان‌های کرمانشاه و کردستان و تا بخش‌هایی از آن سوی مرز ادامه دارد. یونسکو این منظر فرهنگی را به‌خاطر استمرار سنت‌های کشاورزی و دامداری، معماری پلکانی، دانش بومی و سازگاری انسان با محیط کوهستانی ثبت کرده است.
+            </p>
+            <p>
+              در یک سایت مرجع، بهترین کار این است که عکس‌های مردم با نام عکاس، منبع و مجوز استفاده معرفی شوند؛ نه اینکه عکس‌های تصادفی اینترنتی بدون زمینه استفاده شوند.
+            </p>
+            <div class="quote-line">«پاوه را فقط نبین؛ درباره‌اش بخوان، از مردمش بشنو و بعد راه بیفت.»</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORE -->
+    <section id="explore">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">EXPLORE</div>
+          <h2 class="section-title">کجا برویم؟</h2>
+          <p class="section-lead">یک فهرست اولیه برای شروع. این بخش را بعداً می‌توان با مسیرها، آدرس‌ها، شماره‌ها و کسب‌وکارهای واقعی پاوه کامل‌تر کرد.</p>
+        </div>
+
+        <div class="explorer-tools reveal">
+          <div class="filters" role="group" aria-label="فیلتر مکان‌ها">
+            <button class="filter active" data-filter="all">همه</button>
+            <button class="filter" data-filter="nature">طبیعت</button>
+            <button class="filter" data-filter="village">روستا</button>
+            <button class="filter" data-filter="culture">فرهنگ</button>
+          </div>
+          <input class="search" id="placeSearch" type="search" placeholder="جست‌وجو در مکان‌ها..." aria-label="جست‌وجو در مکان‌ها" />
+        </div>
+
+        <div class="place-grid" id="placeGrid">
+          <article class="place-card reveal" data-type="village" data-name="هجیج">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Hajij_Sailing_Pier%2C_a_tourist_destination_in_the_heart_of_Oramanat_8_Mehr.jpg" alt="طبیعت و رودخانه در محدوده هجیج" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">هجیج</h3><span class="place-type">روستا</span></div>
+              <p>روستایی در شهرستان پاوه با چشم‌اندازهای کوهستانی و دسترسی به چشم‌اندازهای سیروان و داریان.</p>
+              <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Hajij%2C%20Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">باز کردن روی نقشه ↗</a>
+            </div>
+          </article>
+
+          <article class="place-card reveal" data-type="nature" data-name="داریان سیروان">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Hawraman_in_Iran_by_Mardetanha_%281%29_06.jpg" alt="آب و کوهستان در هورامان" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">داریان و سیروان</h3><span class="place-type">طبیعت</span></div>
+              <p>برای منظره‌های آبی و کوهستانی؛ منطقه‌ای که در گزارش‌های گردشگری پاوه به‌عنوان یکی از جاذبه‌های شهرستان مطرح شده است.</p>
+              <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Daryan%20Dam%2C%20Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">باز کردن روی نقشه ↗</a>
+            </div>
+          </article>
+
+          <article class="place-card reveal" data-type="nature" data-name="چشمه بل">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Paveh-kermanshah.jpg" alt="چشم‌انداز کوهستانی حوالی پاوه" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">چشمه بل</h3><span class="place-type">طبیعت</span></div>
+              <p>چشمه‌ای شناخته‌شده در منطقه پاوه که در معرفی‌های گردشگری شهرستان در کنار دیگر جاذبه‌های طبیعی آمده است.</p>
+              <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Bil%20Spring%2C%20Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">جست‌وجو روی نقشه ↗</a>
+            </div>
+          </article>
+
+          <article class="place-card reveal" data-type="village" data-name="شمشیر">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Paveh_%2B_Durisan_%2B_Chorzhi.jpg" alt="چشم‌انداز پاوه و دره‌های اطراف" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">شمشیر</h3><span class="place-type">روستا</span></div>
+              <p>از روستاهای گردشگرپذیر شهرستان پاوه که در گزارش‌های محلی در کنار هجیج، داریان و دیگر روستاها معرفی شده است.</p>
+              <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Shamshir%2C%20Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">باز کردن روی نقشه ↗</a>
+            </div>
+          </article>
+
+          <article class="place-card reveal" data-type="culture" data-name="پاوه شهر فرهنگ">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Hawraman_in_Iran_by_Mardetanha_%281%29_02.jpg" alt="بافت کوهستانی هورامان" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">خودِ شهر پاوه</h3><span class="place-type">فرهنگ</span></div>
+              <p>برای دیدن بافت شهری، زندگی روزمره، بازار، مسیرهای پیاده و نقطه‌هایی که داستان محلی را روایت می‌کنند.</p>
+              <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">باز کردن روی نقشه ↗</a>
+            </div>
+          </article>
+
+          <article class="place-card reveal" data-type="culture" data-name="اورامانات یونسکو">
+            <div class="place-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Hawraman_in_Iran_by_Mardetanha_%281%29_05.jpg" alt="چشم‌انداز فرهنگی هورامان" loading="lazy" /></div>
+            <div class="place-content">
+              <div class="place-top"><h3 class="place-title">منظر فرهنگی هورامان</h3><span class="place-type">فرهنگ</span></div>
+              <p>یک پرونده میراثی فراتر از یک شهر؛ ترکیبی از معماری، کشاورزی، کوچ فصلی و زندگی انسانی در کوهستان.</p>
+              <a class="place-link" href="https://whc.unesco.org/en/list/1647/" target="_blank" rel="noopener">صفحه یونسکو ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONE DAY -->
+    <section>
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">A SIMPLE DAY</div>
+          <h2 class="section-title">یک روز، <span class="gradient">سه حال‌وهوا.</span></h2>
+          <p class="section-lead">این فقط یک الگوی پیشنهادی برای طراحی تجربه سایت است؛ زمان و مسیر واقعی را قبل از سفر بررسی کن.</p>
+        </div>
+
+        <div class="journey">
+          <article class="step reveal"><div class="step-num">01 · صبح</div><h3>آرام شروع کن</h3><p>از شهر و بافت اطراف شروع کن؛ صبح را به قدم‌زدن، عکاسی و پیدا کردن جزئیات معماری اختصاص بده.</p></article>
+          <article class="step reveal"><div class="step-num">02 · ظهر</div><h3>راهی طبیعت شو</h3><p>یک مسیر مناسب در اطراف پاوه یا محدوده هجیج و داریان انتخاب کن و حتماً وضعیت راه و شرایط محلی را چک کن.</p></article>
+          <article class="step reveal"><div class="step-num">03 · عصر</div><h3>با یک خاطره برگرد</h3><p>غروب را برای یک چشم‌انداز باز، گفت‌وگو با مردم محلی و ثبت آخرین قاب روز نگه دار.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOD / CRAFT -->
+    <section>
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">TASTE & CRAFT</div>
+          <h2 class="section-title">چیزی که می‌خوری، چیزی که <span class="gradient">می‌خری.</span></h2>
+          <p class="section-lead">غذا و صنایع‌دستی را هم باید بخشی از سفر دید؛ از آن‌ها برای ساختن صفحه‌های محلی دقیق‌تر و معرفی کسب‌وکارهای واقعی می‌شود استفاده کرد.</p>
+        </div>
+
+        <div class="feature-strip">
+          <article class="feature reveal">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Kurdish_cloth_from_Hawraman.jpg" alt="پوشش و پارچه در هورامان" loading="lazy" />
+            <div class="feature-text"><h3>پوشش و صنایع‌دستی</h3><p>پارچه و پوشش کردی، گیوه و دیگر دست‌ساخته‌های منطقه می‌توانند یک بخش مستقل از این مرجع باشند.</p></div>
+          </article>
+          <article class="feature reveal">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Paveh_%2B_Durisan_%2B_Chorzhi.jpg" alt="منظره پاوه" loading="lazy" />
+            <div class="feature-text"><h3>طعمِ محلی</h3><p>در نسخه‌های بعدی، این قسمت می‌تواند به غذاهای محلی، رستوران‌ها، سوغات و آدرس‌های واقعی اختصاص پیدا کند.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">GALLERY</div>
+          <h2 class="section-title">پاوه، در چند قاب.</h2>
+          <p class="section-lead">روی هر تصویر بزن تا بزرگ شود. گالری آماده است تا بعداً عکس‌های خودت از پاوه را جایگزین کنی.</p>
+        </div>
+
+        <div class="gallery">
+          <figure class="gallery-item reveal" data-caption="چشم‌انداز هورامان — Mardetanha / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Hawraman_in_Iran_by_Mardetanha_%281%29_02.jpg" alt="منظره هورامان" loading="lazy" /></figure>
+          <figure class="gallery-item reveal" data-caption="منظره پاوه، دوریسان و چورژی — ArasBabaie / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Paveh_%2B_Durisan_%2B_Chorzhi.jpg" alt="پانورامای پاوه" loading="lazy" /></figure>
+          <figure class="gallery-item reveal" data-caption="آب و کوهستان در هورامان — Mardetanha / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Hawraman_in_Iran_by_Mardetanha_%281%29_06.jpg" alt="آبشار و کوهستان" loading="lazy" /></figure>
+          <figure class="gallery-item reveal" data-caption="مردان با پوشش سنتی در هورامان — Nodshah / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/A_group_of_Kurdish_men_with_traditional_clothing_at_Hawraman%2C_Kurdistan.jpg" alt="پوشش سنتی هورامان" loading="lazy" /></figure>
+          <figure class="gallery-item reveal" data-caption="پوشش کردی در هورامان — Archasia / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Kurdish_cloth_from_Hawraman.jpg" alt="پوشش کردی" loading="lazy" /></figure>
+          <figure class="gallery-item reveal" data-caption="چشم‌انداز کوهستانی پاوه — Arshan azizi / Wikimedia Commons"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Paveh-kermanshah.jpg" alt="طبیعت پاوه" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">LOCATION</div>
+          <h2 class="section-title">پایانِ مسیر؟ <span class="gradient">نه.</span></h2>
+          <p class="section-lead">پاوه در استان کرمانشاه و در قلب ناحیه کوهستانی هورامان قرار گرفته است.</p>
+        </div>
+
+        <div class="location-box reveal">
+          <div class="location-art"></div>
+          <div class="mountain m1"></div><div class="mountain m2"></div><div class="mountain m3"></div>
+          <div class="location-content">
+            <div>
+              <h3>PAWEH</h3>
+              <p>کرمانشاه · غرب ایران</p>
+              <div class="location-actions">
+                <a class="btn btn-soft" href="https://www.google.com/maps/search/?api=1&query=Paveh%2C%20Kermanshah%2C%20Iran" target="_blank" rel="noopener">باز کردن در Google Maps ↗</a>
+                <a class="btn btn-soft" href="https://whc.unesco.org/en/list/1647/" target="_blank" rel="noopener">دیدن پرونده یونسکو ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sources reveal">
+          <strong>منابع و اعتبار تصاویر</strong>
+          اطلاعات مربوط به ثبت جهانی منظر فرهنگی هورامان/اورامانات از UNESCO گرفته شده است. تصاویر این نسخه از Wikimedia Commons انتخاب شده‌اند و کنار هر مورد، منبع/عکاس درج شده است. مجوز هر تصویر را پیش از انتشار عمومی دوباره بررسی کن؛ به‌ویژه تصاویر CC BY و CC BY-SA که نیازمند نسبت‌دادن هستند.
+          <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://whc.unesco.org/en/list/1647/" target="_blank" rel="noopener">UNESCO — Hawraman/Uramanat</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:Paveh" target="_blank" rel="noopener">Wikimedia Commons — Paveh</a>
+            <a href="https://commons.wikimedia.org/wiki/Category:Hawraman" target="_blank" rel="noopener">Wikimedia Commons — Hawraman</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final">
+      <div class="container reveal">
+        <div class="eyebrow">ONE CITY · MANY STORIES</div>
+        <h2>این تازه<br><span class="gradient">شروعشه.</span></h2>
+        <p class="signature">ساخته شده با وسواس توسط <strong>آرتین</strong> · برای پاوه</p>
+        <div class="hero-actions" style="justify-content:center;margin-top:28px;"><a class="btn btn-primary" href="#top">برگردیم بالا ↑</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <span>© 2026 PAWEH</span>
+      <span>Made by Artin · یک پروژه‌ی شخصی برای معرفی پاوه</span>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="نمایش تصویر">
+    <button class="lightbox-close" id="lightboxClose" aria-label="بستن">×</button>
+    <img id="lightboxImage" src="" alt="" />
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      /* Mobile menu */
+      const menuBtn = document.querySelector(".menu-btn");
+      const navLinks = document.querySelector(".nav-links");
+      menuBtn?.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(open));
+      });
+      navLinks?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn?.setAttribute("aria-expanded", "false");
+      }));
+
+      /* Scroll reveal */
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+      /* Number counter */
+      const number = document.querySelector("[data-count]");
+      if (number) {
+        const target = Number(number.dataset.count);
+        let done = false;
+        const countObs = new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting || done) return;
+          done = true;
+          let start = 0;
+          const duration = 1100;
+          const t0 = performance.now();
+          const tick = now => {
+            const p = Math.min((now - t0) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            start = Math.floor(target * eased);
+            number.textContent = start.toLocaleString("fa-IR");
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          countObs.disconnect();
+        }, { threshold: 0.8 });
+        countObs.observe(number);
+      }
+
+      /* Bento tilt on devices with hover */
+      if (window.matchMedia("(hover: hover)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".tilt").forEach(card => {
+          card.addEventListener("pointermove", e => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - .5;
+            const y = (e.clientY - r.top) / r.height - .5;
+            card.style.transform = `perspective(900px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-4px)`;
+          });
+          card.addEventListener("pointerleave", () => card.style.transform = "perspective(900px) rotateX(0) rotateY(0)");
+        });
+      }
+
+      /* Explorer filters + search */
+      const filters = [...document.querySelectorAll(".filter")];
+      const cards = [...document.querySelectorAll(".place-card")];
+      const search = document.getElementById("placeSearch");
+      let active = "all";
+      const apply = () => {
+        const q = (search.value || "").trim().toLowerCase();
+        cards.forEach(card => {
+          const typeOk = active === "all" || card.dataset.type === active;
+          const text = `${card.dataset.name} ${card.textContent}`.toLowerCase();
+          const searchOk = !q || text.includes(q);
+          card.classList.toggle("hidden", !(typeOk && searchOk));
+        });
+      };
+      filters.forEach(btn => btn.addEventListener("click", () => {
+        filters.forEach(x => x.classList.remove("active"));
+        btn.classList.add("active");
+        active = btn.dataset.filter;
+        apply();
+      }));
+      search?.addEventListener("input", apply);
+
+      /* Lightbox */
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const closeBtn = document.getElementById("lightboxClose");
+      const close = () => lightbox.classList.remove("open");
+      document.querySelectorAll(".gallery-item").forEach(item => {
+        item.addEventListener("click", () => {
+          lightboxImage.src = item.querySelector("img").src;
+          lightboxImage.alt = item.querySelector("img").alt;
+          lightboxCaption.textContent = item.dataset.caption || "";
+          lightbox.classList.add("open");
+        });
+      });
+      closeBtn.addEventListener("click", close);
+      lightbox.addEventListener("click", e => { if (e.target === lightbox) close(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+
+      /* Small parallax effect for the hero image */
+      const heroImage = document.querySelector(".hero-photo img");
+      let raf = 0;
+      window.addEventListener("scroll", () => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const y = Math.min(window.scrollY * .055, 28);
+          heroImage?.style.setProperty("transform", `translateY(${y}px) scale(1.06)`);
+          raf = 0;
+        });
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
